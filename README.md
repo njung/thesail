@@ -14,3 +14,9 @@ Installation
 - npm install --save
 - npm install sails-mongo --save
 - sails lift
+
+Access URL
+- http://localhost:1337
+
+Sampel Access API URL
+- http://localhost:1337/articles
