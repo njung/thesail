@@ -1,0 +1,89 @@
+<div class="thumbnail" id="maps" style="height:400px;width:100%;"></div>
+
+<style>
+    .mapboxgl-popup {
+        max-width: 400px;
+        font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    }
+</style>
+
+<script type="text/javascript">
+	mapboxgl.accessToken = 'pk.eyJ1IjoiLWhhYmliLSIsImEiOiJjaWdjbmpsZzE0MXM3dmptM3NzN292NWVhIn0.AfZ7s3jnuqK-2nPzbfl7IA';
+	var map = new mapboxgl.Map({
+	    container: 'maps',
+	    style: 'mapbox://styles/mapbox/streets-v9',
+	    center: [117, -2], // starting position [lng, lat]
+	    zoom: 4 // starting zoom
+	});
+	map.addControl(new mapboxgl.NavigationControl());
+
+	map.on('style.load', function () {
+		map.addSource("spasial", {
+            type: "vector",
+            tiles: [
+                "http://localhost:1337/render/{z}/{x}/{y}"
+            ]
+        });
+
+        map.addLayer({
+            "id": "simple-spasial",
+            "interactive":true,
+            "type": "fill",
+            "source-layer": "layer-name",
+            "source": "spasial",
+            "minzoom": 0,
+            "maxzoom": 22,
+            "paint":{
+            	"fill-color":"#3ec34f",
+        		"fill-opacity":0.7
+            }
+        });
+
+        map.addLayer({
+        	"id":"simple-spasial-outline",
+        	"interactive":true,
+        	"type":"line",
+        	"source-layer": "layer-name",
+            "source": "spasial",
+        	"paint":{
+        		"line-color":"#8e8e00",
+        		"line-width":0.5,
+        		"line-opacity":0.8
+        	}
+        });
+	})
+
+	// Create a popup, but don't add it to the map yet.
+    var popup = new mapboxgl.Popup({
+        closeButton: false,
+        closeOnClick: false
+    });
+
+    map.on('mouseenter', 'simple-spasial', function(e) {
+        // Change the cursor style as a UI indicator.
+        map.getCanvas().style.cursor = 'pointer';
+
+        // Populate the popup and set its coordinates
+        // based on the feature found.
+        popup.setLngLat(e.lngLat)
+            .setHTML(e.features[0].properties.nama)
+            .addTo(map);
+    });
+
+    map.on('click', 'simple-spasial', function(e) {
+        // Change the cursor style as a UI indicator.
+        map.getCanvas().style.cursor = 'pointer';
+
+        // Populate the popup and set its coordinates
+        // based on the feature found.
+        popup.setLngLat(e.lngLat)
+            .setHTML(e.features[0].properties.nama)
+            .addTo(map);
+    });
+
+    map.on('mousemove', function (e) {
+	    var features = map.queryRenderedFeatures(e.point, { layers: ['simple-spasial'] });
+	    map.getCanvas().style.cursor = (features.length) ? "pointer" : "";
+	});
+
+</script>

@@ -1,5 +1,5 @@
 # thesail
-Application CRUD with SailsJS
+Application CRUD with SailsJS and visualisasi geojson with node-mapnik and mapbox gl js
 
 Requirements:
 - NodeJS
@@ -11,6 +11,7 @@ Installation
 - npm install -g sails
 - "Clone this repository"
 - cd thesail
+- git submodule update --recursive
 - npm install --save
 - npm install sails-mongo --save
 - sails lift
