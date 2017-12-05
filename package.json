@@ -5,7 +5,7 @@
   "description": "a Sails application",
   "keywords": [],
   "dependencies": {
-    "ejs": "2.3.4",
+    "ejs": "2.5.5",
     "grunt": "1.0.1",
     "grunt-contrib-clean": "1.0.0",
     "grunt-contrib-coffee": "1.0.0",
@@ -19,12 +19,11 @@
     "grunt-sails-linker": "~0.10.1",
     "grunt-sync": "0.5.2",
     "include-all": "^1.0.0",
+    "mapnik": "^3.6.2",
     "rc": "1.0.1",
     "sails": "~0.12.13",
     "sails-disk": "~0.10.9",
-    "sails-mongo": "^0.12.2",
-
-    "mapnik": "3.6.2"
+    "sails-mongo": "^0.12.2"
   },
   "scripts": {
     "debug": "node debug app.js",
