@@ -11,6 +11,7 @@ Installation
 - npm install -g sails
 - "Clone this repository"
 - cd thesail
+- git submodule init
 - git submodule update --recursive
 - npm install --save
 - npm install sails-mongo --save
